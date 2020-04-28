@@ -46,7 +46,7 @@ public class TaskDaoTest {
 
         this.database.taskDao().insertTask(TASK_DEMO);
 
-        Task task = LiveDataTestUtil.getValue(this.database.taskDao().getTasks(TASK_DEMO));
+        Task task = LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
         assertTrue(task.getName().equals(TASK_DEMO.getName()) && task.getId() == ID);
     }
 }

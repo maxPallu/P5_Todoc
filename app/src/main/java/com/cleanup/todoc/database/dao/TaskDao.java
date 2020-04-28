@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface TaskDao {
     @Query("SELECT * FROM Task WHERE id = :id")
-    LiveData<Task> getTasks(Task id);
+    LiveData<Task> getTasks(long id);
 
     @Insert
     long insertTask(Task task);
