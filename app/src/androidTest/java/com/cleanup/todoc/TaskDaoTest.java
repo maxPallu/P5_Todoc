@@ -15,6 +15,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -43,10 +45,19 @@ public class TaskDaoTest {
 
     @Test
     public void insertAndGetTask() throws InterruptedException {
-
         this.database.taskDao().insertTask(TASK_DEMO);
 
-        Task task = LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
-        assertTrue(task.getName().equals(TASK_DEMO.getName()) && task.getId() == ID);
+        List<Task> task = (List<Task>) LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
+        assertTrue(task.size() == 1);
+    }
+
+    @Test
+    public void insertAndUpdateTasks() throws InterruptedException {
+        this.database.taskDao().insertTask(TASK_DEMO);
+        Task taskAdded = LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
+        this.database.taskDao().updateTask(taskAdded);
+
+        List<Task> tasks = (List<Task>) LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
+        assertTrue(tasks.size() == 1);
     }
 }
