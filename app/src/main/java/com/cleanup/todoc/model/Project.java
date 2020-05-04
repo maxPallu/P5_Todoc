@@ -12,10 +12,12 @@ import android.support.annotation.Nullable;
  *
  * @author Gaëtan HERFRAY
  */
+@Entity
 public class Project {
     /**
      * The unique identifier of the project
      */
+    @PrimaryKey
     private final long id;
 
     /**

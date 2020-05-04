@@ -12,7 +12,6 @@ import java.util.List;
 
 @Dao
 public interface TaskDao {
-    //TODO
     @Query("SELECT * FROM Task")
     LiveData<List<Task>> getTasks();
 
