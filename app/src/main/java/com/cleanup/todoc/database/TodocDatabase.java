@@ -9,15 +9,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.cleanup.todoc.database.dao.ProjectDao;
 import com.cleanup.todoc.database.dao.TaskDao;
+import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
-@Database(entities = Task.class, version = 1, exportSchema = false)
+@Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
 public abstract class TodocDatabase extends RoomDatabase {
 
     private static volatile TodocDatabase INSTANCE;
 
     public abstract TaskDao taskDao();
+    public abstract ProjectDao projectDao();
 
     public static TodocDatabase getInstance(Context context) {
         if (INSTANCE == null) {
