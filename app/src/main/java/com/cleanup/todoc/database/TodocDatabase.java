@@ -46,7 +46,7 @@ public abstract class TodocDatabase extends RoomDatabase {
                 contentValues.put("name", "Ranger les courses");
                 contentValues.put("creationTimestamp", 20);
 
-                db.insert("User", OnConflictStrategy.IGNORE, contentValues);
+                db.insert("Task", OnConflictStrategy.IGNORE, contentValues);
             }
         };
     }

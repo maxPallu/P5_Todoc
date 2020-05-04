@@ -15,8 +15,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Collections;
 import java.util.List;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -47,17 +49,26 @@ public class TaskDaoTest {
     public void insertAndGetTask() throws InterruptedException {
         this.database.taskDao().insertTask(TASK_DEMO);
 
-        List<Task> task = (List<Task>) LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
-        assertTrue(task.size() == 1);
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDao().getTasks());
+        assertTrue(tasks.size() == 1);
     }
 
     @Test
     public void insertAndUpdateTasks() throws InterruptedException {
         this.database.taskDao().insertTask(TASK_DEMO);
-        Task taskAdded = LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
-        this.database.taskDao().updateTask(taskAdded);
+        this.database.taskDao().updateTask(TASK_DEMO);
 
-        List<Task> tasks = (List<Task>) LiveDataTestUtil.getValue(this.database.taskDao().getTasks(ID));
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDao().getTasks());
         assertTrue(tasks.size() == 1);
+    }
+
+    @Test
+    public void insertAndDeleteTask() throws InterruptedException {
+        this.database.taskDao().insertTask(TASK_DEMO);
+        this.database.taskDao().deletetask(ID);
+
+        //TEST
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDao().getTasks());
+        assertTrue(tasks.isEmpty());
     }
 }
