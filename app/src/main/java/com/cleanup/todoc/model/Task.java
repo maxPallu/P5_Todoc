@@ -13,7 +13,7 @@ import java.util.Comparator;
  * @author Gaëtan HERFRAY
  */
 @Entity
-public class Task {
+public class Task    {
     /**
      * The unique identifier of the task
      */
