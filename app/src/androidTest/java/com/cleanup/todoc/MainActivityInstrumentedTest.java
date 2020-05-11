@@ -35,6 +35,11 @@ public class MainActivityInstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
 
+    @BeforeClass
+    public static void clearDB() {
+        InstrumentationRegistry.getTargetContext().deleteDatabase("MyDatabase.db");
+    }
+
     @Test
     public void addAndRemoveTask() {
         MainActivity activity = rule.getActivity();
@@ -58,12 +63,6 @@ public class MainActivityInstrumentedTest {
         assertThat(lblNoTask.getVisibility(), equalTo(View.VISIBLE));
         // Check that recyclerView is not displayed anymore
         assertThat(listTasks.getVisibility(), equalTo(View.GONE));
-    }
-
-    //TODO
-    @BeforeClass
-    public static void clearDB() {
-        InstrumentationRegistry.getTargetContext().deleteDatabase("MyDatabase.db");
     }
 
     @Test
