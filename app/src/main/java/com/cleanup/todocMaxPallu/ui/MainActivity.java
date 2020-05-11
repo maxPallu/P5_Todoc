@@ -1,4 +1,4 @@
-package com.cleanup.todoc.ui;
+package com.cleanup.todocMaxPallu.ui;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,9 +17,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.cleanup.todoc.R;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocMaxPallu.R;
+import com.cleanup.todocMaxPallu.model.Project;
+import com.cleanup.todocMaxPallu.model.Task;
 
 import java.util.ArrayList;
 import java.util.Collections;

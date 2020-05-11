@@ -1,4 +1,4 @@
-package com.cleanup.todoc.ui;
+package com.cleanup.todocMaxPallu.ui;
 
 import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cleanup.todoc.R;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocMaxPallu.R;
+import com.cleanup.todocMaxPallu.model.Project;
+import com.cleanup.todocMaxPallu.model.Task;
 
 import java.util.List;
 
