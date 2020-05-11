@@ -6,7 +6,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.cleanup.todoc.database.TodocDatabase;
-import com.cleanup.todoc.database.dao.TaskDao;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
@@ -37,6 +36,7 @@ public class TaskDaoTest {
                 TodocDatabase.class)
                 .allowMainThreadQueries()
                 .build();
+        this.database.projectDao().insertProject(Project.getProjectById(ID));
     }
 
     @After
