@@ -1,4 +1,4 @@
-package com.cleanup.todocMaxPallu;
+package com.maxpallu.todoc;
 
 import android.support.annotation.IdRes;
 import android.support.test.espresso.PerformException;

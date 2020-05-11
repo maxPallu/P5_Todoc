@@ -1,4 +1,4 @@
-package com.cleanup.todocMaxPallu;
+package com.maxpallu.todoc;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;

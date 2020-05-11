@@ -1,4 +1,4 @@
-package com.cleanup.todocMaxPallu;
+package com.maxpallu.todoc;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;

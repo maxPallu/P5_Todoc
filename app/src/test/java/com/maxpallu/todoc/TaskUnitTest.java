@@ -1,6 +1,6 @@
-package com.cleanup.todocMaxPallu;
+package com.maxpallu.todoc;
 
-import com.cleanup.todocMaxPallu.model.Task;
+import com.maxpallu.todoc.model.Task;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.cleanup.todocMaxPallu.model;
+package com.maxpallu.todoc.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;

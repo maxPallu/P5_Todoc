@@ -1,4 +1,4 @@
-package com.cleanup.todocMaxPallu;
+package com.maxpallu.todoc;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.cleanup.todocMaxPallu.ui.MainActivity;
+import com.maxpallu.todoc.ui.MainActivity;
 
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -20,7 +20,7 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.cleanup.todocMaxPallu.TestUtils.withRecyclerView;
+import static com.maxpallu.todoc.TestUtils.withRecyclerView;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 

@@ -1,11 +1,11 @@
-package com.cleanup.todocMaxPallu;
+package com.maxpallu.todoc;
 
 import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 
-import com.cleanup.todocMaxPallu.database.TodocDatabase;
-import com.cleanup.todocMaxPallu.model.Project;
-import com.cleanup.todocMaxPallu.model.Task;
+import com.maxpallu.todoc.database.TodocDatabase;
+import com.maxpallu.todoc.model.Project;
+import com.maxpallu.todoc.model.Task;
 
 import org.junit.Before;
 import org.junit.Test;
