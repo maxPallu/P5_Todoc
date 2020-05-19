@@ -1,7 +1,9 @@
 package com.maxpallu.todoc.repositories;
 
+import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
+import com.maxpallu.todoc.database.TodocDatabase;
 import com.maxpallu.todoc.database.dao.TaskDao;
 import com.maxpallu.todoc.model.Task;
 
@@ -10,6 +12,13 @@ import java.util.List;
 public class TaskDataRepository {
 
     private final TaskDao taskDao;
+    private LiveData<List<Task>> tasks;
+
+    public TaskDataRepository(Application application) {
+        TodocDatabase database = TodocDatabase.getInstance(application);
+        taskDao = database.taskDao();
+        tasks = taskDao.getAllTasks();
+    }
 
     public TaskDataRepository(TaskDao taskDao) { this.taskDao = taskDao; }
 

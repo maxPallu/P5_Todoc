@@ -1,6 +1,8 @@
 package com.maxpallu.todoc.ui;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -20,9 +22,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.maxpallu.todoc.R;
-import com.maxpallu.todoc.database.dao.TaskDao;
-import com.maxpallu.todoc.injections.Injection;
-import com.maxpallu.todoc.injections.ViewModelFactory;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
 
@@ -102,13 +101,19 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
         setContentView(R.layout.activity_main);
 
-        this.configureViewModel();
-
         listTasks = findViewById(R.id.list_tasks);
         lblNoTasks = findViewById(R.id.lbl_no_task);
 
         listTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listTasks.setAdapter(adapter);
+
+        mTaskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+        mTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(@Nullable List<Task> tasks) {
+                adapter.setTasks(tasks);
+            }
+        });
 
         findViewById(R.id.fab_add_task).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,11 +155,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         updateTasks();
     }
 
-    private void configureViewModel(){
-        ViewModelFactory mViewModelFactory = Injection.provideViewModelFactory(this);
-        this.mTaskViewModel = ViewModelProviders.of(this, mViewModelFactory).get(TaskViewModel.class);
-    }
-
     private void deleteTask(Task task)
     {
         this.mTaskViewModel.deleteTask(task);
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             }
             // If both project and name of the task have been set
             else if (taskProject != null) {
-                long id = taskProject.getId();
+                long id = 0;
 
                 Task task = new Task(id, taskProject.getId(), taskName, new Date().getTime());
 
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      */
     private void addTask(Task task) {
         tasks.add(task);
-        mTaskViewModel.createTask(task);
+        mTaskViewModel.insertTask(task);
         updateTasks();
 
     }

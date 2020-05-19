@@ -1,5 +1,6 @@
 package com.maxpallu.todoc.database;
 
+import android.app.Activity;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -7,12 +8,15 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.ContentValues;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.maxpallu.todoc.database.dao.ProjectDao;
 import com.maxpallu.todoc.database.dao.TaskDao;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
+
+import java.lang.ref.WeakReference;
 
 @Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
 public abstract class TodocDatabase extends RoomDatabase {
@@ -28,7 +32,8 @@ public abstract class TodocDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TodocDatabase.class, "MyDatabase.db")
-                            .addCallback(prepopulateDatabase())
+                            .fallbackToDestructiveMigration()
+                            .addCallback(prepopulateDatabase)
                             .build();
                 }
             }
@@ -36,21 +41,25 @@ public abstract class TodocDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static Callback prepopulateDatabase(){
-        return new Callback() {
+    private static RoomDatabase.Callback prepopulateDatabase = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            new PopulateDbAsyncTask(INSTANCE).execute();
+        }
+    };
 
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
+    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
+        private TaskDao mTaskDao;
 
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("id", 0);
-                contentValues.put("projectId", 2);
-                contentValues.put("name", "Ranger les courses");
-                contentValues.put("creationTimestamp", 20);
+        private PopulateDbAsyncTask(TodocDatabase db) {
+            mTaskDao = db.taskDao();
+        }
 
-                db.insert("Task", OnConflictStrategy.IGNORE, contentValues);
-            }
-        };
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mTaskDao.insertTask(new Task(0, 1, "Ranger les courses", 20));
+            return null;
+        }
     }
 }
