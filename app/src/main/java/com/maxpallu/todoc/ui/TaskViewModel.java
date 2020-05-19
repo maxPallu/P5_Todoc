@@ -9,11 +9,18 @@ import com.maxpallu.todoc.model.Task;
 import com.maxpallu.todoc.repositories.TaskDataRepository;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 public class TaskViewModel extends AndroidViewModel {
 
     private TaskDataRepository mRepository;
     private LiveData<List<Task>> mTasks;
+    private final Executor executor = new Executor() {
+        @Override
+        public void execute(Runnable command) {
+
+        }
+    };
 
     public TaskViewModel(@NonNull Application application) {
         super(application);
@@ -22,15 +29,21 @@ public class TaskViewModel extends AndroidViewModel {
     }
 
     public void insertTask(Task task) {
-        mRepository.createTask(task);
+        executor.execute(() -> {
+            mRepository.createTask(task);
+        });
     }
 
     public void updateTask(Task task) {
-        mRepository.updateTask(task);
+        executor.execute(() -> {
+            mRepository.updateTask(task);
+        });
     }
 
     public void deleteTask(Task task) {
-        mRepository.deleteTask(task);
+        executor.execute(() -> {
+            mRepository.deleteTask(task);
+        });
     }
 
     public LiveData<List<Task>> getAllTasks() {

@@ -22,10 +22,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.maxpallu.todoc.R;
+import com.maxpallu.todoc.database.dao.TaskDao;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         mTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
-                adapter.setTasks(tasks);
+                adapter.updateTasks(tasks);
             }
         });
 
@@ -153,11 +155,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         tasks.remove(task);
         mTaskViewModel.deleteTask(task);
         updateTasks();
-    }
-
-    private void deleteTask(Task task)
-    {
-        this.mTaskViewModel.deleteTask(task);
     }
 
     /**
@@ -225,7 +222,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         tasks.add(task);
         mTaskViewModel.insertTask(task);
         updateTasks();
-
     }
 
     /**
