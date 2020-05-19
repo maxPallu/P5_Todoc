@@ -44,8 +44,8 @@ public abstract class TodocDatabase extends RoomDatabase {
                 super.onCreate(db);
 
                 ContentValues contentValues = new ContentValues();
-                contentValues.put("id", 1);
-                contentValues.put("projectId", 1);
+                contentValues.put("id", 0);
+                contentValues.put("projectId", 2);
                 contentValues.put("name", "Ranger les courses");
                 contentValues.put("creationTimestamp", 20);
 

@@ -2,7 +2,6 @@ package com.maxpallu.todoc.ui;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.maxpallu.todoc.model.Project;

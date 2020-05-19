@@ -27,6 +27,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
     @NonNull
     private List<Task> tasks;
 
+    private List<Project> projects;
+
     /**
      * The listener for when a task needs to be deleted
      */

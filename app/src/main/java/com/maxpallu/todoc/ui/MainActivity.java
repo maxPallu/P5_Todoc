@@ -1,5 +1,6 @@
 package com.maxpallu.todoc.ui;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.maxpallu.todoc.model.Task;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>Home activity of the application which is displayed when the user opens the app.</p>
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * List of all current tasks of the application
      */
     @NonNull
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * The adapter which handles the list of tasks
@@ -93,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     private TextView lblNoTasks;
 
     private TaskViewModel mTaskViewModel;
-    private TaskDao mTaskDao;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -145,17 +146,13 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     @Override
     public void onDeleteTask(Task task) {
         tasks.remove(task);
+        mTaskViewModel.deleteTask(task);
         updateTasks();
     }
 
     private void configureViewModel(){
         ViewModelFactory mViewModelFactory = Injection.provideViewModelFactory(this);
         this.mTaskViewModel = ViewModelProviders.of(this, mViewModelFactory).get(TaskViewModel.class);
-    }
-
-    private void insertTask(Task task)
-    {
-        this.mTaskViewModel.createTask(task);
     }
 
     private void deleteTask(Task task)
@@ -188,13 +185,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             else if (taskProject != null) {
                 long id = taskProject.getId();
 
-
-                Task task = new Task(
-                        id,
-                        taskProject.getId(),
-                        taskName,
-                        new Date().getTime()
-                );
+                Task task = new Task(id, taskProject.getId(), taskName, new Date().getTime());
 
                 addTask(task);
 
@@ -230,9 +221,9 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      *
      * @param task the task to be added to the list
      */
-    private void addTask(@NonNull Task task) {
+    private void addTask(Task task) {
         tasks.add(task);
-        insertTask(task);
+        mTaskViewModel.createTask(task);
         updateTasks();
 
     }
