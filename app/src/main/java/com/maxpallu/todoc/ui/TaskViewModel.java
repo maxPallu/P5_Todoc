@@ -6,17 +6,13 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.maxpallu.todoc.model.Task;
-import com.maxpallu.todoc.repositories.ProjectDataRepository;
 import com.maxpallu.todoc.repositories.TaskDataRepository;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
 public class TaskViewModel extends AndroidViewModel {
 
     private TaskDataRepository mRepository;
-    private ProjectDataRepository mProjectDataRepository;
-    private Executor mExecutor;
     private LiveData<List<Task>> mTasks;
 
     public TaskViewModel(@NonNull Application application) {
