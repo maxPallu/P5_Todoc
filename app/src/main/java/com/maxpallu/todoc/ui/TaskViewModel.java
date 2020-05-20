@@ -47,6 +47,9 @@ public class TaskViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Task>> getAllTasks() {
+        executor.execute(() -> {
+            mTasks = mRepository.getAllTasks();
+        });
         return mTasks;
     }
 }

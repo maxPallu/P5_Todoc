@@ -22,9 +22,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.maxpallu.todoc.R;
+import com.maxpallu.todoc.database.TodocDatabase;
 import com.maxpallu.todoc.database.dao.TaskDao;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
+import com.maxpallu.todoc.repositories.TaskDataRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -222,6 +224,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         tasks.add(task);
         mTaskViewModel.insertTask(task);
         updateTasks();
+    }
+
+    private void getTasks() {
+
     }
 
     /**
