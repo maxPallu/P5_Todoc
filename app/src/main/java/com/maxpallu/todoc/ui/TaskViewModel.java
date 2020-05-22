@@ -10,17 +10,13 @@ import com.maxpallu.todoc.repositories.TaskDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class TaskViewModel extends AndroidViewModel {
 
     private TaskDataRepository mRepository;
     private LiveData<List<Task>> mTasks;
-    private final Executor executor = new Executor() {
-        @Override
-        public void execute(Runnable command) {
-
-        }
-    };
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
     public TaskViewModel(@NonNull Application application) {
         super(application);

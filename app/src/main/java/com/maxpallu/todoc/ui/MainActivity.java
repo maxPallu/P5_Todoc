@@ -111,13 +111,13 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         listTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listTasks.setAdapter(adapter);
 
-
-
         mTaskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
         mTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
             @Override
-            public void onChanged(@Nullable List<Task> tasks) {
-                adapter.updateTasks(tasks);
+            public void onChanged(@Nullable List<Task> taskList) {
+                tasks.clear();
+                tasks.addAll(taskList);
+                updateTasks();
             }
         });
 
