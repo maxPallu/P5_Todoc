@@ -1,8 +1,6 @@
 package com.maxpallu.todoc.ui;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -22,14 +20,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.maxpallu.todoc.R;
-import com.maxpallu.todoc.database.TodocDatabase;
-import com.maxpallu.todoc.database.dao.TaskDao;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
-import com.maxpallu.todoc.repositories.TaskDataRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
