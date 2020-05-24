@@ -1,12 +1,9 @@
 package com.maxpallu.todoc.database;
 
-import android.app.Activity;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -15,8 +12,6 @@ import com.maxpallu.todoc.database.dao.ProjectDao;
 import com.maxpallu.todoc.database.dao.TaskDao;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
-
-import java.lang.ref.WeakReference;
 
 @Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
 public abstract class TodocDatabase extends RoomDatabase {
@@ -58,7 +53,6 @@ public abstract class TodocDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mTaskDao.insertTask(new Task(0, 1, "Ranger les courses", 20));
             return null;
         }
     }
