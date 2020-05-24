@@ -222,10 +222,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         updateTasks();
     }
 
-    private void getTasks() {
-
-    }
-
     /**
      * Updates the list of tasks in the UI
      */
