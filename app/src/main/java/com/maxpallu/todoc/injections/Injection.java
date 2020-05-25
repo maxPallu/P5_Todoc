@@ -22,4 +22,11 @@ public class Injection {
     }
 
     public static Executor provideExecutor() { return Executors.newSingleThreadExecutor(); }
+
+    public static ViewModelFactory provideViewModelFactory(Context context) {
+        TaskDataRepository dataSourceTask = provideTaskDataSource(context);
+        ProjectDataRepository dataSourceProject = provideProjectDataSource(context);
+        Executor executor = provideExecutor();
+        return new ViewModelFactory(dataSourceTask, dataSourceProject, executor);
+    }
 }

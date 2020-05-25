@@ -3,25 +3,29 @@ package com.maxpallu.todoc.ui;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
+import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
+import com.maxpallu.todoc.repositories.ProjectDataRepository;
 import com.maxpallu.todoc.repositories.TaskDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class TaskViewModel extends AndroidViewModel {
+public class TaskViewModel extends ViewModel {
 
     private TaskDataRepository mRepository;
+    private ProjectDataRepository mDataRepository;
     private LiveData<List<Task>> mTasks;
-    private final Executor executor = Executors.newSingleThreadExecutor();
+    private final Executor executor;
 
-    public TaskViewModel(@NonNull Application application) {
-        super(application);
-        mRepository = new TaskDataRepository(application);
-        mTasks = mRepository.getAllTasks();
+    public TaskViewModel(TaskDataRepository taskDataSource, ProjectDataRepository projectDataSource, Executor executor) {
+        this.mRepository = taskDataSource;
+        this.mDataRepository = projectDataSource;
+        this.executor = executor;
     }
 
     public void insertTask(Task task) {

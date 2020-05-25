@@ -13,9 +13,9 @@ import java.util.Comparator;
  *
  * @author Gaëtan HERFRAY
  */
-@Entity(foreignKeys = @ForeignKey(entity = Project.class,
+@Entity/*(foreignKeys = @ForeignKey(entity = Project.class,
         parentColumns = "id",
-        childColumns = "projectId"))
+        childColumns = "projectId"))*/
 
 public class Task    {
     /**

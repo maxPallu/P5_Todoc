@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.maxpallu.todoc.R;
+import com.maxpallu.todoc.injections.Injection;
+import com.maxpallu.todoc.injections.ViewModelFactory;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
 
@@ -105,8 +107,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         listTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listTasks.setAdapter(adapter);
 
-        mTaskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
-        mTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+
+        ViewModelFactory mViewModelFactory = Injection.provideViewModelFactory(this);
+        this.mTaskViewModel = ViewModelProviders.of(this, mViewModelFactory).get(TaskViewModel.class);
+        this.mTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> taskList) {
                 tasks.clear();
