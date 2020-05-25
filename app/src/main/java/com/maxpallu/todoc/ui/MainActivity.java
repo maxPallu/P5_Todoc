@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.maxpallu.todoc.R;
+import com.maxpallu.todoc.database.TodocDatabase;
 import com.maxpallu.todoc.injections.Injection;
 import com.maxpallu.todoc.injections.ViewModelFactory;
 import com.maxpallu.todoc.model.Project;
@@ -106,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
         listTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listTasks.setAdapter(adapter);
-
 
         ViewModelFactory mViewModelFactory = Injection.provideViewModelFactory(this);
         this.mTaskViewModel = ViewModelProviders.of(this, mViewModelFactory).get(TaskViewModel.class);
