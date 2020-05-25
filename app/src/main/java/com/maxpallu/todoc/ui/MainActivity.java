@@ -24,7 +24,6 @@ import com.maxpallu.todoc.injections.Injection;
 import com.maxpallu.todoc.injections.ViewModelFactory;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
-import com.maxpallu.todoc.repositories.ProjectDataRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
