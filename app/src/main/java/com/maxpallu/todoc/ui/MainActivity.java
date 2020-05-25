@@ -24,6 +24,7 @@ import com.maxpallu.todoc.injections.Injection;
 import com.maxpallu.todoc.injections.ViewModelFactory;
 import com.maxpallu.todoc.model.Project;
 import com.maxpallu.todoc.model.Task;
+import com.maxpallu.todoc.repositories.ProjectDataRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * List of all projects available in the application
      */
-    private final Project[] allProjects = Project.getAllProjects();
+    private ArrayList<Project> allProjects = new ArrayList<>();
 
     /**
      * List of all current tasks of the application
@@ -116,6 +117,14 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
                 tasks.clear();
                 tasks.addAll(taskList);
                 updateTasks();
+            }
+        });
+
+        mTaskViewModel.getProjects().observe(this, new Observer<List<Project>>() {
+            @Override
+            public void onChanged(@Nullable List<Project> projects) {
+                allProjects.clear();
+                allProjects.addAll(projects);
             }
         });
 

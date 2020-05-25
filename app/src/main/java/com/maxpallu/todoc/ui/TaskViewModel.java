@@ -13,12 +13,12 @@ import com.maxpallu.todoc.repositories.TaskDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class TaskViewModel extends ViewModel {
 
     private TaskDataRepository mRepository;
     private ProjectDataRepository mDataRepository;
+    private LiveData<List<Project>> mProjects;
     private LiveData<List<Task>> mTasks;
     private final Executor executor;
 
@@ -47,9 +47,12 @@ public class TaskViewModel extends ViewModel {
     }
 
     public LiveData<List<Task>> getAllTasks() {
-        executor.execute(() -> {
-            mTasks = mRepository.getAllTasks();
-        });
+        mTasks = mRepository.getAllTasks();
         return mTasks;
+    }
+
+    public LiveData<List<Project>> getProjects() {
+        mProjects = mDataRepository.getProjects();
+        return mProjects;
     }
 }

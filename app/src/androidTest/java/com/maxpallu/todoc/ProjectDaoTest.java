@@ -19,7 +19,6 @@ public class ProjectDaoTest {
     private TodocDatabase database;
 
     private static long ID = 1;
-    private static Task TASK_DEMO = new Task(ID, 1, "Faire la vaisselle", 25);
     private Project TEST_PROJECT = Project.getProjectById(ID);
 
     @Before
